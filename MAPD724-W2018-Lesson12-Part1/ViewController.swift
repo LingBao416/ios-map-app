@@ -13,6 +13,9 @@ class ViewController: UIViewController {
     var delta = 5.0
     let mapLocation = CLLocationCoordinate2DMake(43.6532, -79.3832)
 
+    @IBOutlet weak var latText: UITextField!
+    @IBOutlet weak var lonText: UITextField!
+    @IBOutlet weak var magText: UITextField!
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -29,7 +32,10 @@ class ViewController: UIViewController {
         
     }
 
-
+    @IBAction func search(_ sender: UIButton) {
+        
+    }
+    
     @IBAction func seeInMapApp(_ sender: UIButton) {
         let placemark = MKPlacemark(coordinate: self.mapLocation, addressDictionary: nil)
         let mapitem = MKMapItem(placemark: placemark)
