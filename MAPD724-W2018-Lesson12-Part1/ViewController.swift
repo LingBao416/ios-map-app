@@ -11,7 +11,7 @@ class ViewController: UIViewController {
     var lat = 43.6532
     var long = -79.3832
     var delta = 0.5
-    let mapLocation = CLLocationCoordinate2DMake(43.6532, -79.3832)
+
 
     @IBOutlet weak var latText: UITextField!
     @IBOutlet weak var lonText: UITextField!
@@ -23,31 +23,32 @@ class ViewController: UIViewController {
         let reg = MKCoordinateRegionMake(loc, span)
         self.map.region = reg
 
-        let ann = MKPointAnnotation()
-        ann.coordinate = self.mapLocation
-        ann.title = "Toronto"
-        ann.subtitle = "A place that's really cool"
-        self.map.addAnnotation(ann)
+//        let ann = MKPointAnnotation()
+//        ann.coordinate = self.mapLocation
+//        ann.title = "Toronto"
+//        ann.subtitle = "A place that's really cool"
+//        self.map.addAnnotation(ann)
         
     }
 
     @IBAction func search(_ sender: UIButton) {
-        let long = Float(self.lonText.text!)
-        let lat = Float(self.latText.text!)
-        let mag = Float(self.magText.text!)
+        let long = Double(self.lonText.text!)
+        let lat = Double(self.latText.text!)
+        let mag = Double(self.magText.text!)
+        let mapLocation = CLLocationCoordinate2DMake(lat!, long!)
         let loc = CLLocationCoordinate2D(latitude: CLLocationDegrees(lat!), longitude: CLLocationDegrees(long!))
         let span = MKCoordinateSpanMake(CLLocationDegrees(mag!), CLLocationDegrees(mag!))
         let reg = MKCoordinateRegionMake(loc, span)
         self.map.region = reg
         let ann = MKPointAnnotation()
-        ann.coordinate = self.mapLocation
+        ann.coordinate = mapLocation
         ann.title = "Search"
         ann.subtitle = "A place that's really cool"
         self.map.addAnnotation(ann)
     }
     
     @IBAction func seeInMapApp(_ sender: UIButton) {
-        let placemark = MKPlacemark(coordinate: self.mapLocation, addressDictionary: nil)
+        let placemark = MKPlacemark(coordinate: self.map.centerCoordinate  , addressDictionary: nil)
         let mapitem = MKMapItem(placemark: placemark)
         mapitem.name = "A really icy place"
         
